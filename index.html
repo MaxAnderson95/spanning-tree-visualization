@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="A living isometric visualization of the Rapid Spanning Tree Protocol (RSTP / 802.1w) — root election, port roles, the proposal/agreement handshake, and the one blocked port that breaks every loop."
+    />
+    <title>RSTP — spanning tree, visualized</title>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="scene"></div>
+      <div id="labels"></div>
+    </div>
+
+    <header id="topbar"></header>
+    <aside id="dials"></aside>
+    <aside id="side"></aside>
+    <footer id="timeline"></footer>
+    <div id="toasts"></div>
+    <div id="modal"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

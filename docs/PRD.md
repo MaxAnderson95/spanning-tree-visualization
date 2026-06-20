@@ -155,7 +155,7 @@ Every call returns a `StepResult` describing what the world should do next:
 ```ts
 interface StepResult {
   bpdus: { portId: PortId; bpdu: Bpdu }[]; // to transmit; the host delivers them
-  events: StpEvent[];                       // semantic events to narrate/animate
+  events: StpEvent[]; // semantic events to narrate/animate
 }
 ```
 
@@ -168,14 +168,14 @@ without mocks.
 The core runs in one of two protocol modes, selectable live (the STP↔RSTP
 toggle), because the headline lesson is the contrast:
 
-| | **STP (802.1D)** | **RSTP (802.1w)** |
-| --- | --- | --- |
-| Port states | Blocking, Listening, Learning, Forwarding (+Disabled) | Discarding, Learning, Forwarding |
-| Who originates BPDUs | only the root; others relay | every bridge, every Hello |
-| Transition to Forwarding | timers: Listening (FwdDelay) → Learning (FwdDelay) | proposal/agreement handshake on P2P, else timer fallback |
-| Failure detection | Max-Age expiry (20 s) | missing 3× Hello (≈6 s), faster |
-| Topology change | TCN BPDUs toward root, root sets TC flag | TC flooded directly, MAC flush |
-| Convergence | ~30–50 s | sub-second on P2P |
+|                          | **STP (802.1D)**                                      | **RSTP (802.1w)**                                        |
+| ------------------------ | ----------------------------------------------------- | -------------------------------------------------------- |
+| Port states              | Blocking, Listening, Learning, Forwarding (+Disabled) | Discarding, Learning, Forwarding                         |
+| Who originates BPDUs     | only the root; others relay                           | every bridge, every Hello                                |
+| Transition to Forwarding | timers: Listening (FwdDelay) → Learning (FwdDelay)    | proposal/agreement handshake on P2P, else timer fallback |
+| Failure detection        | Max-Age expiry (20 s)                                 | missing 3× Hello (≈6 s), faster                          |
+| Topology change          | TCN BPDUs toward root, root sets TC flag              | TC flooded directly, MAC flush                           |
+| Convergence              | ~30–50 s                                              | sub-second on P2P                                        |
 
 Switching mode re-runs the relevant state machines from the current topology.
 Only the rows that differ above live in the mode-specific modules; everything
@@ -255,7 +255,7 @@ The editable network is plain, serializable data (also the unit of save/share,
 - **Link** — id, two endpoints `{ switchId|hostId, portId }`, speed (→ default
   cost), per-end path cost and port priority overrides, and an up/cut state.
 - **Port** — derived: created on demand when a link is drawn, labeled `P1, P2,
-  …` in creation order per device, carries role/state at runtime, and is
+…` in creation order per device, carries role/state at runtime, and is
   flagged `edge` when its link's far end is a host.
 
 `src/model/` also holds pure graph helpers (enumerate a device's ports, find a
@@ -754,4 +754,3 @@ Called out explicitly, not hidden:
 - **Protection features:** BPDU Guard, Root Guard, Loop Guard demonstrations.
 - **Shared-media/hub element** to introduce the Backup port role.
 - **MSTP / per-VLAN** instances as a larger stretch.
-
